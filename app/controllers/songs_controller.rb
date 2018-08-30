@@ -1,4 +1,7 @@
+require 'rackflash3'
+
 class SongsController < ApplicationController
+  use Rack::Flash
   def index
     if params[:artist_id]
       @artist = Artist.find_by(id: params[:artist_id])
@@ -17,7 +20,7 @@ class SongsController < ApplicationController
     if params[:id]
       @song = Song.find_by(id: params[:id])
       if @song == nil
-        redirect_to artists_path 
+        redirect_to artists_path
       end
     else
       @songs = Song.all
